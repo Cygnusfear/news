@@ -37,12 +37,12 @@ export const Article = (props) => {
             className="block group relative overflow-hidden mb-2 md:mb-8 md:grid grid-cols-2 text-left"
           >
             <img
-              className="relative object-cover w-full h-56 drop-shadow-xl rounded-lg visible md:hidden md:float-right border-stone-900 group-hover:border-yellow-800 border group-hover:border-solid"
+              className="relative object-cover w-full h-56 drop-shadow-xl rounded-lg visible md:hidden md:float-right"
               src={image}
               alt=""
             />
-            <div className="relative p-4 py-0 mt-2 md:mt-0 md:float-left block">
-              <h5 className="text-m text-stone-200 font-light mb-0 md:mb-2">
+            <div className="relative p-2 md:p-4 py-0 mt-2 md:mt-0 md:float-left block">
+              <h5 className="text-m text-stone-200 font-light mb-0 md:mb-2 group-hover:text-salomie-300">
                 {article.title}
               </h5>
 
@@ -69,7 +69,7 @@ export const Article = (props) => {
               </div>
             </div>
             <img
-              className="relative object-cover w-full h-56 drop-shadow-xl rounded-lg hidden md:visible md:block md:float-right border-stone-900 group-hover:border-yellow-800 border group-hover:border-solid"
+              className="relative object-cover w-full h-56 drop-shadow-xl rounded-lg hidden md:visible md:block md:float-right"
               src={image}
               alt=""
             />
