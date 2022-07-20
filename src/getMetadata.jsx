@@ -6,10 +6,8 @@ export const getMetadata = (url) => async () => {
     let feedURL = `${import.meta.env.DEV ? CORS_PROXY : ""}${API}${url}`;
     try {
       let feed = await fetch(feedURL, {});
-      console.log(feed);
       feed = await feed.json();
-      console.log(feed);
-      resolve(feed);
+      return resolve(feed);
     } catch (e) {
       console.warn(e);
     }

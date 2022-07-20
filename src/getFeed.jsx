@@ -4,6 +4,7 @@ const API = "https://news-wildprojector.vercel.app/api/feed?url=";
 export const getFeeds = (urls) => async () => {
   let items = [];
   let promises = [];
+  let icon;
   urls.forEach((x) => {
     promises.push(
       new Promise(async (resolve, reject) => {
@@ -24,8 +25,9 @@ export const getFeeds = (urls) => async () => {
                 .split("...")[0]
                 .split("Continue reading")[0] + (delimited ? "..." : "");
             items.push(item);
-            // console.log(item);
           });
+          icon = feed.icon;
+          console.log(feed);
           resolve();
         } catch (e) {
           console.warn(e);
@@ -35,5 +37,5 @@ export const getFeeds = (urls) => async () => {
     );
   });
   await Promise.all(promises);
-  return Promise.resolve({ feed: items });
+  return Promise.resolve({ feed: items, icon: icon });
 };

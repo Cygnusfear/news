@@ -14,9 +14,8 @@ export const Article = (props) => {
       "https://source.unsplash.com/random/?" + article.categories.join("");
   }
   if (!payload) return <></>;
-  let { metadata } = payload;
+  let metadata = payload;
   if (metadata) {
-    // console.log(metadata);
   }
   if (metadata && metadata.image && metadata.image.length > 0) {
     image = metadata.image[0].url;
@@ -39,10 +38,9 @@ export const Article = (props) => {
               </p>
               <div className="mb-3 text-xs font-normal text-stone-700 break-inside-avoid">
                 <img
-                  src={metadata.icon || ""}
+                  src={props.icon || ""}
                   className="pr-4"
                   style={{
-                    width: "16px",
                     height: "16px",
                     display: "inline",
                   }}

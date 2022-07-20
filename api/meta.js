@@ -1,7 +1,6 @@
 import * as ogjs from "meta-og-scrape";
 
 export default async function run(req, res) {
-  console.log(req);
   let query = req.query;
   if (!query.url) {
     res.status(400).end();
