@@ -1,4 +1,4 @@
-import * as ogjs from "meta-og-scrape";
+import Metascraper from "metascraper";
 
 export default async function run(req, res) {
   let query = req.query;
