@@ -1,7 +1,6 @@
 import React, { useCallback } from "react";
 import { useAsyncLocalState } from "./Loader";
 import TimeAgo from "react-timeago";
-import buildFormatter from "react-timeago/lib/formatters/buildFormatter";
 import { getMetadata } from "./getMetadata";
 
 export const Article = (props) => {
@@ -36,7 +35,7 @@ export const Article = (props) => {
               </h5>
 
               <p className="mt-1 text-sm text-stone-500 mb-2 font-light">
-                {article.contentSnippet}
+                {article.description}
               </p>
               <div className="mb-3 text-xs font-normal text-stone-700 break-inside-avoid">
                 <img
@@ -51,7 +50,7 @@ export const Article = (props) => {
                 {metadata.siteName}{" "}
                 <span className="text-yellow-800 font-extrabold">&#183;</span>
                 &nbsp;
-                <TimeAgo date={article.pubDate} />
+                <TimeAgo date={article.published} />
               </div>
             </div>
             <img

@@ -1,5 +1,4 @@
-import Parser from "rss-parser";
-let parser = new Parser();
+import { read } from "feed-reader";
 
 const CORS_PROXY = "http://0.0.0.0:3009/";
 
@@ -11,14 +10,16 @@ export const getFeeds = (urls) => async () => {
       new Promise(async (resolve, reject) => {
         try {
           let feedURL = `${import.meta.env.DEV ? CORS_PROXY : ""}${x}`;
-          let feed = await parser.parseURL(feedURL);
-          feed.items.forEach((item) => {
+          let feed = await read(feedURL);
+          console.log(feed);
+          // let feed = await parse.parseURL(feedURL);
+          feed.entries.forEach((item) => {
             let delimited =
-              item.contentSnippet.split("…").length > 1 ||
-              item.contentSnippet.split("...").length > 1 ||
-              item.contentSnippet.split("Continue reading").length > 1;
-            item.contentSnippet =
-              item.contentSnippet
+              item.description.split("…").length > 1 ||
+              item.description.split("...").length > 1 ||
+              item.description.split("Continue reading").length > 1;
+            item.description =
+              item.description
                 .split("…")[0]
                 .split("...")[0]
                 .split("Continue reading")[0] + (delimited ? "..." : "");
@@ -27,6 +28,7 @@ export const getFeeds = (urls) => async () => {
           });
           resolve();
         } catch (e) {
+          console.warn(e);
           resolve();
         }
       })

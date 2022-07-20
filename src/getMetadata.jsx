@@ -1,5 +1,9 @@
 import faviconFetch from "favicon-fetch";
-import * as ogjs from "meta-og-scrape";
+import * as _ogjs from "meta-og-scrape";
+// tslint:disable-next-line:no-duplicate-imports
+import { default as _rollupogjs, Ogjs } from "meta-og-scrape";
+
+const ogjs = _rollupogjs || _ogjs;
 
 const CORS_PROXY = "http://0.0.0.0:3009/";
 

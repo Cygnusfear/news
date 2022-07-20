@@ -36,16 +36,7 @@ export const Feed = () => {
             })
             .map((item) => <Article article={item} key={item.title} />)}
         {loadError && <p>Load Error</p>}
-        {isLoading && (
-          <p>
-            <div
-              className="spinner-grow inline-block w-8 h-8 bg-current rounded-full opacity-0 text-stone-800"
-              role="status"
-            >
-              <span className="visually-hidden">Loading...</span>
-            </div>
-          </p>
-        )}
+        {isLoading && <p></p>}
       </ul>
     </>
   );
