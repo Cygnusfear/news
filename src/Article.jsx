@@ -50,7 +50,7 @@ export const Article = (props) => {
                 {metadata.siteName}{" "}
                 <span className="text-yellow-800 font-extrabold">&#183;</span>
                 &nbsp;
-                <TimeAgo date={article.published} />
+                <TimeAgo date={article.isoDate} />
               </div>
             </div>
             <img

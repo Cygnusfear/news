@@ -12,15 +12,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      sys: "util",
-      process: "process/browser",
       util: "util",
-      timers: "rollup-plugin-node-polyfills/polyfills/timers",
-      stream: "rollup-plugin-node-polyfills/polyfills/stream",
-      events: "rollup-plugin-node-polyfills/polyfills/events",
-      request: "request",
-      "forever-agent": "forever-agent",
-      buffer: "buffer",
     },
   },
   optimizeDeps: {
