@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "PUBLIC_URL='/' vite build",
     "preview": "vite preview"
   },
   "dependencies": {
