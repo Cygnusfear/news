@@ -29,7 +29,7 @@ export const Feed = () => {
     );
   return (
     <>
-      <ul className=" m-4 mt-6 md:m-8">
+      <ul className=" m-4 mt-6 md:m-8" style={{ userSelect: "none" }}>
         {payload &&
           payload.feed &&
           payload.feed
