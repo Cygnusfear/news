@@ -15,6 +15,8 @@ export const getFeeds = (urls) => async () => {
           // console.log(feed);
           // let feed = await parse.parseURL(feedURL);
           feed.items.forEach((item) => {
+            if (item.creator && item.creator.includes("Advertiser")) return;
+            console.log(item);
             item.contentSnippet = item.contentSnippet
               .replaceAll("(?i)<td[^>]*>", " ")
               .replaceAll("\\s+", " ")
