@@ -3,18 +3,9 @@ import { useAsyncLocalState } from "./Loader";
 import TimeAgo from "react-timeago";
 import { getFeeds } from "./getFeed";
 import { Article } from "./Article";
+import feedJson from "./feeds.json";
 
-const feeds = [
-  `https://blog.siggraph.org/feed/`,
-  `https://scitechdaily.com/feed/`,
-  `https://techxplore.com/rss-feed/machine-learning-ai-news/`,
-  `https://www.space.com/feeds/all`,
-  `http://www.sciencedaily.com/newsfeed.xml`,
-  `https://www.theportugalnews.com/rss`,
-  `http://www.physorg.com/rss-feed/`,
-  `http://feeds.feedburner.com/sciencealert-latestnews`,
-  `http://www.universetoday.com/universetoday.xml`,
-];
+const feeds = feedJson.feeds;
 
 export const Feed = () => {
   const [urls] = React.useState(feeds);

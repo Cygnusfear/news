@@ -9,10 +9,10 @@ export const ArticleSmall = (props) => {
         className="block relative overflow-hidden mb-6 md:mb-8 grid grid-cols-2 text-left"
       >
         <div className="relative p-4 py-0 ">
-          <h5 className="text-m text-stone-200 font-light mb-0 md:mb-2">
+          <h5 className="text-sm md:text-m text-stone-200 font-light mb-1 md:mb-2">
             {article.title}
           </h5>
-          <div className="mb-3 text-xs font-normal text-stone-700 break-inside-avoid">
+          <div className="mb-3 text-xs font-normal text-stone-600 break-inside-avoid">
             <div
               className="mr-2"
               style={{

@@ -49,7 +49,7 @@ export const Article = (props) => {
               <p className="mt-1 text-sm text-stone-500 mb-2 font-light hidden md:visible md:block ">
                 {article.contentSnippet}
               </p>
-              <div className="mb-3 text-xs font-normal text-stone-700 break-inside-avoid">
+              <div className="mb-3 text-xs font-normal text-stone-600 break-inside-avoid">
                 <div
                   className="mr-2"
                   style={{

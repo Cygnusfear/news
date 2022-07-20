@@ -1,0 +1,15 @@
+{
+  "feeds": [
+    "https://news.ycombinator.com/rss",
+    "https://blog.siggraph.org/feed/",
+    "https://scitechdaily.com/feed/",
+    "https://techxplore.com/rss-feed/machine-learning-ai-news/",
+    "https://www.space.com/feeds/all",
+    "http://www.sciencedaily.com/newsfeed.xml",
+    "https://www.theportugalnews.com/rss",
+    "http://www.physorg.com/rss-feed/",
+    "http://feeds.feedburner.com/sciencealert-latestnews",
+    "http://www.universetoday.com/universetoday.xml",
+    "http://www.theverge.com/rss/full.xml"
+  ]
+}

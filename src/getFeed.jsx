@@ -12,7 +12,7 @@ export const getFeeds = (urls) => async () => {
           let feedURL = `${import.meta.env.DEV ? CORS_PROXY : ""}${API}${x}`;
           let feed = await fetch(feedURL, {});
           feed = await feed.json();
-          console.log(feed);
+          // console.log(feed);
           // let feed = await parse.parseURL(feedURL);
           feed.items.forEach((item) => {
             item.contentSnippet = item.contentSnippet
@@ -39,7 +39,7 @@ export const getFeeds = (urls) => async () => {
             }
             items.push(item);
           });
-          console.log(feed);
+          // console.log(feed);
           resolve();
         } catch (e) {
           console.warn(e);
