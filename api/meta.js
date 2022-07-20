@@ -1,4 +1,4 @@
-import * as _ogjs from "meta-og-scrape";
+import * as ogjs from "meta-og-scrape";
 
 export default async function run(req, res) {
   console.log(req);
