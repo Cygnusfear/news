@@ -34,9 +34,7 @@ export const Feed = () => {
               if (a.isoDate > b.isoDate) return -1;
               return 0;
             })
-            .map((item, idx) => (
-              <Article article={item} key={idx} icon={payload.icon} />
-            ))}
+            .map((item, idx) => <Article article={item} key={idx} />)}
         {loadError && <p>Load Error</p>}
         {isLoading && <p></p>}
       </ul>

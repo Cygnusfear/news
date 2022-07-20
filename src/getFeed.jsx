@@ -18,16 +18,18 @@ export const getFeeds = (urls) => async () => {
             let delimited =
               item.contentSnippet.split("…").length > 1 ||
               item.contentSnippet.split("...").length > 1 ||
-              item.contentSnippet.split("Continue reading").length > 1;
+              item.contentSnippet.split("Continue reading").length > 1 ||
+              item.contentSnippet.length > 320;
+            if (item.contentSnippet.length > 320)
+              item.contentSnippet = item.contentSnippet.slice(0, 320);
             item.contentSnippet =
               item.contentSnippet
                 .split("…")[0]
                 .split("...")[0]
                 .split("Continue reading")[0] + (delimited ? "..." : "");
+            item.icon = feed.image.url;
             items.push(item);
           });
-          icon = feed.icon;
-          console.log(feed);
           resolve();
         } catch (e) {
           console.warn(e);
