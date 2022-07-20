@@ -7,7 +7,7 @@ export default async function run(req, res) {
   if (!query.url) {
     res.status(400).end();
   }
-  let icon = faviconFetch({ uri: query.url });
+  let icon = await faviconFetch({ uri: query.url });
   let feed = await parser.parseURL(query.url);
   feed.icon = icon;
   res.end(JSON.stringify(feed));

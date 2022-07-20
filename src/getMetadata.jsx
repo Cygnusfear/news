@@ -7,16 +7,15 @@ export const getMetadata = (url) => async () => {
     try {
       let feed = await fetch(feedURL, {});
       feed = await feed.json();
-      return resolve(feed);
-    } catch (e) {
-      console.warn(e);
-    }
-    try {
-      feedURL = feedURL.split("//");
-      let domain = feedURL[1].split("/");
-      feedURL = feedURL[0] + domain[0];
-      let feed = await fetch(feedURL, {});
-      feed = await feed.json();
+      if (!feed.siteName) {
+        if (import.meta.env.DEV) {
+          feedURL = feedURL.slice(CORS_PROXY.length);
+        }
+        feedURL = feedURL.slice(API.length);
+        feedURL = feedURL.replace(/^https?:\/\/www\./, "");
+        let domain = feedURL.split("/");
+        feed.siteName = domain[0];
+      }
       return resolve(feed);
     } catch (e) {
       console.warn(e);
