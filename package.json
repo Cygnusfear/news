@@ -13,13 +13,13 @@
     "cors-anywhere": "^0.4.4",
     "favicon-fetch": "^1.0.0",
     "meta-og-scrape": "^1.0.0",
+    "metascraper": "^5.29.18",
     "process": "^0.11.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-timeago": "^7.1.0",
     "request": "^2.88.2",
     "rss-parser": "^3.12.0",
-    "scrape-meta": "^0.1.4",
     "util": "^0.12.4"
   },
   "devDependencies": {
