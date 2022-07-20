@@ -2,10 +2,8 @@ import "./App.css";
 import { Feed } from "./Feed";
 
 function App() {
-  // setArticles((arr) => feedItems);
-
   return (
-    <div className="App">
+    <div className="App m-4 mt-4 md:m-8">
       <Feed />
       <div className="card"></div>
     </div>
