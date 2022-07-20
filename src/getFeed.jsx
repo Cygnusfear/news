@@ -1,5 +1,5 @@
 const CORS_PROXY = "http://0.0.0.0:3009/";
-const API = "https://news-wildprojector.vercel.app/api/index?url=";
+const API = "https://news-wildprojector.vercel.app/api/feed?url=";
 
 export const getFeeds = (urls) => async () => {
   let items = [];
