@@ -12,6 +12,7 @@
     "buffer": "^6.0.3",
     "cors-anywhere": "^0.4.4",
     "favicon-fetch": "^1.0.0",
+    "html-metadata": "^1.7.1",
     "meta-og-scrape": "^1.0.0",
     "process": "^0.11.10",
     "react": "^18.2.0",
@@ -19,7 +20,6 @@
     "react-timeago": "^7.1.0",
     "request": "^2.88.2",
     "rss-parser": "^3.12.0",
-    "scrape-meta": "^0.1.4",
     "util": "^0.12.4"
   },
   "devDependencies": {

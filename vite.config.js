@@ -12,6 +12,8 @@ export default defineConfig({
   },
   resolve: {
     alias: {
+      sys: "util",
+      process: "process/browser",
       util: "util",
     },
   },
