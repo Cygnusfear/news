@@ -6,7 +6,7 @@ export default async function run(req, res) {
   if (!query.url) {
     res.status(400).end();
   }
-  ogjs({ url: `${query.url}` }).then(
+  ogjs.default({ url: `${query.url}` }).then(
     function (data) {
       res.end(JSON.stringify(data));
     },
