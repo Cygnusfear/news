@@ -16,8 +16,8 @@ export const Article = (props) => {
   }
   if (!payload) return <></>;
   let metadata = payload;
-  if (metadata && metadata.image && metadata.image.length > 0) {
-    image = metadata.image[0].url;
+  if (metadata && metadata.image && metadata.image) {
+    image = metadata.image;
   }
   if (article.contentSnippet.length < 100)
     return (

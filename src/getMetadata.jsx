@@ -9,15 +9,17 @@ export const getMetadata = (url) => async () => {
       let feed = await fetch(feedURL, {});
       returnVal = feed;
       let response = await feed.json();
-
       if (!response.title) {
         if (import.meta.env.DEV) {
           feedURL = feedURL.slice(CORS_PROXY.length);
         }
         feedURL = feedURL.slice(API.length);
-        feedURL = feedURL.replace(/^https?:\/\/www\./, "");
+        feedURL = feedURL.replace(/^https?:\/\//, "");
+        feedURL = feedURL.replace(/^http?:\/\//, "");
+        feedURL = feedURL.replace(/^www\./, "");
         let domain = feedURL.split("/");
         response.title = domain[0];
+        response.image = response.openGraph.image.url;
       }
       return resolve(response);
     } catch (e) {

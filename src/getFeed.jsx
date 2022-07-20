@@ -32,6 +32,7 @@ export const getFeeds = (urls) => async () => {
                 .split("...")[0]
                 .split("Continue reading")[0] + (delimited ? "..." : "");
             if (feed.image) {
+              item.icon = feed.image.url;
               if (!item.icon) console.log(feed);
             }
             if (feed.icon) {
