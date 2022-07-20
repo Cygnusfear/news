@@ -34,10 +34,10 @@ export const Article = (props) => {
         <li>
           <a
             href={article.link}
-            className="block relative overflow-hidden mb-2 md:mb-8 md:grid grid-cols-2 text-left"
+            className="block group relative overflow-hidden mb-2 md:mb-8 md:grid grid-cols-2 text-left"
           >
             <img
-              className="relative object-cover w-full h-56 drop-shadow-xl rounded-lg visible md:hidden md:float-right"
+              className="relative object-cover w-full h-56 drop-shadow-xl rounded-lg visible md:hidden md:float-right border-stone-900 group-hover:border-yellow-800 border group-hover:border-solid"
               src={image}
               alt=""
             />
@@ -69,7 +69,7 @@ export const Article = (props) => {
               </div>
             </div>
             <img
-              className="relative object-cover w-full h-56 drop-shadow-xl rounded-lg hidden md:visible md:block md:float-right"
+              className="relative object-cover w-full h-56 drop-shadow-xl rounded-lg hidden md:visible md:block md:float-right border-stone-900 group-hover:border-yellow-800 border group-hover:border-solid"
               src={image}
               alt=""
             />

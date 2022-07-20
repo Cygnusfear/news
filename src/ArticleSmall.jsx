@@ -6,7 +6,7 @@ export const ArticleSmall = (props) => {
     <li>
       <a
         href={article.link}
-        className="block relative overflow-hidden mb-6 md:mb-8 grid grid-cols-2 text-left"
+        className="block group relative overflow-hidden mb-6 md:mb-8 grid grid-cols-2 text-left"
       >
         <div className="relative p-4 py-0 ">
           <h5 className="text-sm md:text-m text-stone-200 font-light mb-1 md:mb-2">
@@ -32,7 +32,7 @@ export const ArticleSmall = (props) => {
           </div>
         </div>
         <img
-          className="relative object-cover w-full h-28 drop-shadow-xl rounded-lg"
+          className="relative object-cover w-full h-28 drop-shadow-xl rounded-lg border-stone-900  group-hover:border-yellow-800 border group-hover:border-solid"
           src={image}
           alt=""
         />
