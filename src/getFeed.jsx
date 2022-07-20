@@ -1,7 +1,5 @@
-import { read } from "feed-reader";
-
 const CORS_PROXY = "http://0.0.0.0:3009/";
-
+const API = "https://news-wildprojector.vercel.app/api/index?url=";
 export const getFeeds = (urls) => async () => {
   let items = [];
   let promises = [];
@@ -9,11 +7,11 @@ export const getFeeds = (urls) => async () => {
     promises.push(
       new Promise(async (resolve, reject) => {
         try {
-          let feedURL = `${import.meta.env.DEV ? CORS_PROXY : ""}${x}`;
-          let feed = await read(feedURL);
+          let feedURL = `${import.meta.env.DEV ? CORS_PROXY : ""}${API}${x}`;
+          let feed = await fetch(feedURL);
           console.log(feed);
           // let feed = await parse.parseURL(feedURL);
-          feed.entries.forEach((item) => {
+          feed.items.forEach((item) => {
             let delimited =
               item.description.split("…").length > 1 ||
               item.description.split("...").length > 1 ||
