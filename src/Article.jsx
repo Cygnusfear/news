@@ -39,7 +39,7 @@ export const Article = (props) => {
               <div className="mb-3 text-xs font-normal text-stone-700 break-inside-avoid">
                 <img
                   src={props.icon || ""}
-                  className="pr-4"
+                  className="pr-2"
                   style={{
                     height: "16px",
                     display: "inline",

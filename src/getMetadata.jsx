@@ -11,5 +11,15 @@ export const getMetadata = (url) => async () => {
     } catch (e) {
       console.warn(e);
     }
+    try {
+      feedURL = feedURL.split("//");
+      let domain = feedURL[1].split("/");
+      feedURL = feedURL[0] + domain[0];
+      let feed = await fetch(feedURL, {});
+      feed = await feed.json();
+      return resolve(feed);
+    } catch (e) {
+      console.warn(e);
+    }
   });
 };
