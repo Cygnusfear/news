@@ -5,7 +5,7 @@ export default async function run(req, res) {
   if (!query.url) {
     res.status(400).end();
   }
-  let data = await Metascraper.scrapeUrl(query.url);
+  let data = await Metascraper.default.scrapeUrl(query.url);
   console.log(data);
   res.end(JSON.stringify(data));
 }
