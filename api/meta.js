@@ -1,11 +1,11 @@
-import Metascraper from "metascraper";
+import Metascraper from "scrape-meta";
 
 export default async function run(req, res) {
   let query = req.query;
   if (!query.url) {
     res.status(400).end();
   }
-  let data = await Metascraper.default.scrapeUrl(query.url);
-  console.log(data);
+  console.log(Metascraper.default);
+  let data = await Metascraper.scrapeUrl(query.url);
   res.end(JSON.stringify(data));
 }
