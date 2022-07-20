@@ -14,9 +14,22 @@ export const Feed = () => {
   if (payload) {
     console.log(payload);
   }
+  if (isLoading)
+    return (
+      <p
+        className="absolute w-full"
+        style={{ marginLeft: "auto", width: "100%", textAlign: "center" }}
+      >
+        <img
+          src="./icon.png"
+          className="animate-pulse animate-bounce drop-shadow-lg"
+          style={{ marginLeft: "calc(50% - 48px)" }}
+        />
+      </p>
+    );
   return (
     <>
-      <ul>
+      <ul className=" m-4 mt-6 md:m-8">
         {payload &&
           payload.feed &&
           payload.feed
@@ -27,7 +40,6 @@ export const Feed = () => {
             })
             .map((item, idx) => <Article article={item} key={idx} />)}
         {loadError && <p>Load Error</p>}
-        {isLoading && <p></p>}
       </ul>
     </>
   );
