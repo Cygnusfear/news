@@ -35,7 +35,7 @@ export const Article = (props) => {
               </h5>
 
               <p className="mt-1 text-sm text-stone-500 mb-2 font-light">
-                {article.description}
+                {article.contentSnippet}
               </p>
               <div className="mb-3 text-xs font-normal text-stone-700 break-inside-avoid">
                 <img
