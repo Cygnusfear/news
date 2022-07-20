@@ -62,7 +62,7 @@ export const Article = (props) => {
                     opacity: "0.2",
                   }}
                 />
-                {metadata.siteName}{" "}
+                {metadata.title}{" "}
                 <span className="text-yellow-800 font-extrabold">&#183;</span>
                 &nbsp;
                 <TimeAgo date={article.isoDate} />

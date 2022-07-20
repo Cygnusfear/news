@@ -8,24 +8,16 @@ export const getMetadata = (url) => async () => {
     try {
       let feed = await fetch(feedURL, {});
       returnVal = feed;
-      let response;
-      try {
-        response = await feed.text();
-      } catch (e) {
-        console.log(`weird shit`, feed);
-        response = await feed.text();
-      }
-      console.log(response);
-      response = JSON.parse(response);
+      let response = await feed.json();
 
-      if (!response.siteName) {
+      if (!response.title) {
         if (import.meta.env.DEV) {
           feedURL = feedURL.slice(CORS_PROXY.length);
         }
         feedURL = feedURL.slice(API.length);
         feedURL = feedURL.replace(/^https?:\/\/www\./, "");
         let domain = feedURL.split("/");
-        response.siteName = domain[0];
+        response.title = domain[0];
       }
       return resolve(response);
     } catch (e) {
