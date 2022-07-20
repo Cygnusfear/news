@@ -1,4 +1,4 @@
-// import faviconFetch from "favicon-fetch";
+import faviconFetch from "favicon-fetch";
 import Parser from "rss-parser";
 let parser = new Parser();
 
