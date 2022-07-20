@@ -15,6 +15,10 @@ export const getFeeds = (urls) => async () => {
           console.log(feed);
           // let feed = await parse.parseURL(feedURL);
           feed.items.forEach((item) => {
+            item.contentSnippet = item.contentSnippet
+              .replaceAll("(?i)<td[^>]*>", " ")
+              .replaceAll("\\s+", " ")
+              .trim();
             let delimited =
               item.contentSnippet.split("…").length > 1 ||
               item.contentSnippet.split("...").length > 1 ||
@@ -27,9 +31,15 @@ export const getFeeds = (urls) => async () => {
                 .split("…")[0]
                 .split("...")[0]
                 .split("Continue reading")[0] + (delimited ? "..." : "");
-            item.icon = feed.image.url;
+            if (feed.image) {
+              if (!item.icon) console.log(feed);
+            }
+            if (feed.icon) {
+              item.icon = feed.icon || "";
+            }
             items.push(item);
           });
+          console.log(feed);
           resolve();
         } catch (e) {
           console.warn(e);
@@ -39,5 +49,5 @@ export const getFeeds = (urls) => async () => {
     );
   });
   await Promise.all(promises);
-  return Promise.resolve({ feed: items, icon: icon });
+  return Promise.resolve({ feed: items });
 };

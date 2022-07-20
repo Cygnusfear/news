@@ -6,10 +6,10 @@ export const ArticleSmall = (props) => {
     <li>
       <a
         href={article.link}
-        className="block overflow-hidden mb-8 grid grid-cols-2 text-left"
+        className="block relative overflow-hidden mb-6 md:mb-8 grid grid-cols-2 text-left"
       >
-        <div className="p-4 pt-0 relative">
-          <h5 className="text-m text-stone-200 font-light mb-2">
+        <div className="relative p-4 py-0 ">
+          <h5 className="text-m text-stone-200 font-light mb-0 md:mb-2">
             {article.title}
           </h5>
           <div className="mb-3 text-xs font-normal text-stone-700 break-inside-avoid">
@@ -32,7 +32,7 @@ export const ArticleSmall = (props) => {
           </div>
         </div>
         <img
-          className="object-cover w-full h-28 drop-shadow-xl rounded-lg"
+          className="relative object-cover w-full h-28 drop-shadow-xl rounded-lg"
           src={image}
           alt=""
         />
