@@ -6,7 +6,7 @@ export default async function run(req, res) {
   if (!query.url) {
     res.status(400).end();
   }
-  ogjs({ url: `${import.meta.env.DEV ? CORS_PROXY : ""}${url}` }).then(
+  ogjs({ url: `${url}` }).then(
     function (data) {
       res.end(JSON.stringify(data));
     },
