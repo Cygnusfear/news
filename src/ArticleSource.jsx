@@ -2,7 +2,7 @@ import TimeAgo from "react-timeago";
 
 export const ItemSource = ({ article }) => {
   return (
-    <div className="mb-3 text-xs font-normal text-stone-600 break-inside-avoid ">
+    <div className="mb-3 text-xs font-normal text-stone-700 break-inside-avoid ">
       <div
         className="mr-2"
         style={{

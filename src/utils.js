@@ -23,3 +23,18 @@ export function getNameFromUrl(url) {
   let domain = url.split("/");
   return domain[0];
 }
+
+export function getImgSrc(content) {
+  let match = Array.from(
+    content.matchAll(/<img\s.*?src=(?:'|")([^'">]+)(?:'|")/g),
+    (m) => m[1]
+  );
+  return (match && match[0]) || undefined;
+}
+
+export function fixIcon(url, icon) {
+  if (icon[0] === "/") icon = icon.slice(1);
+  if (!icon.includes("http"))
+    icon = "https://" + new URL(url).hostname + "/" + icon;
+  return icon;
+}

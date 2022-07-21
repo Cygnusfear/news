@@ -3,16 +3,20 @@ import { useAsyncLocalState } from "./Loader";
 import TimeAgo from "react-timeago";
 import { getMetadata } from "./getMetadata";
 import { ArticleSmall } from "./ArticleSmall";
-import { formatSnippet } from "./utils";
+import { formatSnippet, getImgSrc } from "./utils";
 import { ItemSource } from "./ArticleSource";
 
 export const Article = ({ article }) => {
   const [url] = React.useState(article.link);
   const loader = useCallback(getMetadata(url), [url]);
   const { payload, isLoading, loadError } = useAsyncLocalState(loader);
-  if (!payload) return <></>;
+
+  if (!payload || isLoading) return <></>;
+
+  // merge metadata
   article = { ...article, ...payload.metadata };
 
+  // do some special stuff in case we didn't get useful metadayta
   if (!article.image) {
     let categories = article.categories;
     if (!article.categories) {
@@ -21,6 +25,7 @@ export const Article = ({ article }) => {
     article.image = `https://source.unsplash.com/random/?search=${categories.join(
       " "
     )}`;
+    article.image = getImgSrc(article.content) || article.image;
   }
 
   if (!article.description || article.description.length < 100) {
@@ -63,7 +68,6 @@ export const Article = ({ article }) => {
         </li>
       )}
       {loadError && <p>Load Error</p>}
-      {isLoading && <p></p>}
     </>
   );
 };

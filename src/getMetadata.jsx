@@ -1,4 +1,4 @@
-import { formatSnippet, getNameFromUrl } from "./utils";
+import { fixIcon, formatSnippet, getNameFromUrl } from "./utils";
 
 const CORS_PROXY = "http://0.0.0.0:3009/";
 const API = "https://news-wildprojector.vercel.app/api/meta?url=";
@@ -14,13 +14,6 @@ const options = {
   },
 };
 
-function fixIcon(url, icon) {
-  if (icon[0] === "/") icon = icon.slice(1);
-  if (!icon.includes("http"))
-    icon = "https://" + new URL(url).hostname + "/" + icon;
-  return icon;
-}
-
 export const getMetadata = (url) => async () => {
   return new Promise(async (resolve, reject) => {
     let feedURL = `${import.meta.env.DEV ? CORS_PROXY : ""}${API}${url}`;
@@ -35,13 +28,15 @@ export const getMetadata = (url) => async () => {
       // bail if no metadata / bad response
       if (!feed.ok) return resolve({});
       let response = await feed.json();
+
       let metadata = {
         icon: fixIcon(url, response?.general?.icons[0]?.href) || "",
         siteName: response?.openGraph?.site_name || getNameFromUrl(url),
         image: response?.openGraph?.image?.url || undefined,
         description: response?.general?.description || undefined,
       };
-      console.log({ metadata, response });
+
+      // console.log({ metadata, response });
       return resolve({ metadata, response });
     } catch (e) {
       return resolve({ empty: true });
