@@ -35,6 +35,11 @@ export const Article = ({ article }) => {
   const onHover = () => {
     console.log(article, payload);
   };
+
+  const onImageError = (e) => {
+    e.currentTarget.src = "https://source.unsplash.com/random";
+    return true;
+  };
   return (
     <>
       {article && !isLoading && (
@@ -48,6 +53,7 @@ export const Article = ({ article }) => {
               className="relative object-cover w-full h-56 drop-shadow-xl rounded-lg visible md:hidden md:float-right "
               src={article.image}
               alt=""
+              onError={onImageError}
             />
             <div className="relative p-2 md:p-4 py-0 mt-2 md:mt-0 md:float-left block">
               <h5 className="text-m text-stone-200 font-light mb-0 md:mb-2 group-hover:text-salomie-300 group-visited:opacity-5">
@@ -63,6 +69,7 @@ export const Article = ({ article }) => {
               className="relative object-cover w-full h-56 drop-shadow-xl rounded-lg hidden md:visible md:block md:float-right"
               src={article.image}
               alt=""
+              onError={onImageError}
             />
           </a>
         </li>

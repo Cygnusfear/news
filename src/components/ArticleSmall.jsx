@@ -4,6 +4,10 @@ export const ArticleSmall = ({ article }) => {
   const onHover = () => {
     console.log(article);
   };
+  const onImageError = (e) => {
+    e.currentTarget.src = "https://source.unsplash.com/random";
+    return true;
+  };
   return (
     <li>
       <a
@@ -21,6 +25,7 @@ export const ArticleSmall = ({ article }) => {
           className="relative object-cover w-full h-28 drop-shadow-xl rounded-lg"
           src={article.image}
           alt=""
+          onError={onImageError}
         />
       </a>
     </li>
