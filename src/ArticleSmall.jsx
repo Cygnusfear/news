@@ -6,13 +6,13 @@ export const ArticleSmall = (props) => {
     <li>
       <a
         href={article.link}
-        className="block group relative overflow-hidden mb-6 md:mb-8 grid grid-cols-2 text-left"
+        className="block group relative overflow-hidden mb-6 md:mb-8 grid grid-cols-2 text-left visited:opacity-80"
       >
-        <div className="relative p-2 md:p-4 py-0 ">
+        <div className="relative p-2 md:p-4 py-0">
           <h5 className="text-sm md:text-m text-stone-200 font-light mb-1 md:mb-2 group-hover:text-salomie-300">
             {article.title}
           </h5>
-          <div className="mb-3 text-xs font-normal text-stone-600 break-inside-avoid">
+          <div className="mb-3 text-xs font-normal text-stone-600 break-inside-avoid ">
             <div
               className="mr-2"
               style={{

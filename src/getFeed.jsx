@@ -1,8 +1,9 @@
 const CORS_PROXY = "http://0.0.0.0:3009/";
 const API = "https://news-wildprojector.vercel.app/api/feed?url=";
 
+let items = [];
+
 export const getFeeds = (urls) => async () => {
-  let items = [];
   let promises = [];
   let icon;
   urls.forEach((x) => {
@@ -16,7 +17,7 @@ export const getFeeds = (urls) => async () => {
           // let feed = await parse.parseURL(feedURL);
           feed.items.forEach((item) => {
             if (item.creator && item.creator.includes("Advertiser")) return;
-            console.log(item);
+            if (items.find((x) => x.title === item.title)) return;
             item.contentSnippet = item.contentSnippet
               .replaceAll("(?i)<td[^>]*>", " ")
               .replaceAll("\\s+", " ")

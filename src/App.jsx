@@ -3,7 +3,7 @@ import { Feed } from "./Feed";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App mx-auto md:max-w-screen-md">
       <Feed />
       <div className="card"></div>
     </div>
