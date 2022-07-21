@@ -12,13 +12,34 @@ export const Article = (props) => {
   let image = "https://source.unsplash.com/random/?news";
   if (article.categories && article.categories.length > 0) {
     image =
-      "https://source.unsplash.com/random/?" + article.categories.join("");
+      "https://source.unsplash.com/random/?search" +
+      article.categories.join(",");
   }
   if (!payload) return <></>;
   let metadata = payload;
-  if (metadata && metadata.image && metadata.image !== "") {
-    image = metadata.image;
+  if (metadata) {
+    if (metadata.image && metadata.image !== "") {
+      image = metadata.image;
+    } else if (!article.categories) {
+      let categories = (
+        article.title ||
+        metadata.general?.title ||
+        metadata.description ||
+        ""
+      ).split(" ");
+      if (categories == "") console.log(article.title, image);
+      image = `https://source.unsplash.com/random/?search=${categories.join(
+        ","
+      )}`;
+      metadata.image = image;
+    }
+    if (metadata.description) {
+      article.contentSnippet = metadata.description;
+    }
   }
+  const onHover = () => {
+    console.log(metadata);
+  };
   if (article.contentSnippet.length < 100)
     return (
       <ArticleSmall
@@ -35,6 +56,7 @@ export const Article = (props) => {
           <a
             href={article.link}
             className="block group relative overflow-hidden mb-2 md:mb-8 md:grid grid-cols-2 text-left group-visited:opacity-5"
+            onMouseEnter={() => onHover()}
           >
             <img
               className="relative object-cover w-full h-56 drop-shadow-xl rounded-lg visible md:hidden md:float-right "

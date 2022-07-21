@@ -1,3 +1,5 @@
+import formatSnippet from "./utils";
+
 const CORS_PROXY = "http://0.0.0.0:3009/";
 const API = "https://news-wildprojector.vercel.app/api/meta?url=";
 
@@ -22,7 +24,7 @@ export const getMetadata = (url) => async () => {
         feed = await fetch(feedURL, options);
       } catch (e) {
         console.warn(e);
-        return resolve({});
+        return resolve({ empty: true });
       }
       if (!feed.ok) return resolve({});
       returnVal = feed;
@@ -43,9 +45,12 @@ export const getMetadata = (url) => async () => {
       } else {
         // console.log(url, response);
       }
+      if (response?.general?.description) {
+        response.description = formatSnippet(response.general.description);
+      }
       return resolve(response);
     } catch (e) {
-      console.warn(url, e, returnVal);
+      return resolve({ empty: true });
     }
   });
 };

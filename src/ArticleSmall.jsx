@@ -2,11 +2,15 @@ import TimeAgo from "react-timeago";
 
 export const ArticleSmall = (props) => {
   let { article, metadata, icon, image } = props;
+  const onHover = () => {
+    console.log(metadata);
+  };
   return (
     <li>
       <a
         href={article.link}
         className="block group relative overflow-hidden mb-6 md:mb-8 grid grid-cols-2 text-left visited:opacity-80"
+        onMouseEnter={() => onHover()}
       >
         <div className="relative p-2 md:p-4 py-0">
           <h5 className="text-sm md:text-m text-stone-200 font-light mb-1 md:mb-2 group-hover:text-salomie-300">

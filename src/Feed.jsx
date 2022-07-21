@@ -1,4 +1,4 @@
-import React, { Suspense, useCallback } from "react";
+import React, { Suspense, useCallback, useState } from "react";
 import { useAsyncLocalState } from "./Loader";
 import TimeAgo from "react-timeago";
 import { getFeeds } from "./getFeed";
@@ -8,11 +8,12 @@ import feedJson from "./feeds.json";
 const feeds = feedJson.feeds;
 
 export const Feed = () => {
-  const [urls] = React.useState(feeds);
+  const [urls] = useState(feeds);
+  const [loaded, setLoaded] = useState(10);
   const loader = useCallback(getFeeds(urls), [urls]);
   const { payload, isLoading, loadError } = useAsyncLocalState(loader);
   if (payload) {
-    console.log(payload);
+    // console.log(payload);
   }
   if (isLoading)
     return (
@@ -27,6 +28,20 @@ export const Feed = () => {
         />
       </p>
     );
+
+  window.onscroll = function (ev) {
+    var pageHeight = Math.max(
+      document.body.scrollHeight,
+      document.body.offsetHeight,
+      document.documentElement.clientHeight,
+      document.documentElement.scrollHeight,
+      document.documentElement.offsetHeight
+    );
+    if (window.innerHeight + window.scrollY >= pageHeight / 2) {
+      setLoaded(loaded + 3);
+    }
+  };
+
   return (
     <>
       <ul
@@ -41,6 +56,7 @@ export const Feed = () => {
               if (a.isoDate > b.isoDate) return -1;
               return 0;
             })
+            .slice(0, loaded)
             .map((item, idx) => (
               <Suspense key={idx}>
                 <Article article={item} key={idx} />
