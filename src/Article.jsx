@@ -3,52 +3,32 @@ import { useAsyncLocalState } from "./Loader";
 import TimeAgo from "react-timeago";
 import { getMetadata } from "./getMetadata";
 import { ArticleSmall } from "./ArticleSmall";
+import { formatSnippet } from "./utils";
+import { ItemSource } from "./ArticleSource";
 
-export const Article = (props) => {
-  const [url] = React.useState(props.article.link);
+export const Article = ({ article }) => {
+  const [url] = React.useState(article.link);
   const loader = useCallback(getMetadata(url), [url]);
   const { payload, isLoading, loadError } = useAsyncLocalState(loader);
-  let { article } = props;
-  let image = "https://source.unsplash.com/random/?news";
-  if (article.categories && article.categories.length > 0) {
-    image =
-      "https://source.unsplash.com/random/?search" +
-      article.categories.join(",");
-  }
   if (!payload) return <></>;
-  let metadata = payload;
-  if (metadata) {
-    if (metadata.image && metadata.image !== "") {
-      image = metadata.image;
-    } else if (!article.categories) {
-      let categories = (
-        article.title ||
-        metadata.general?.title ||
-        metadata.description ||
-        ""
-      ).split(" ");
-      if (categories == "") console.log(article.title, image);
-      image = `https://source.unsplash.com/random/?search=${categories.join(
-        ","
-      )}`;
-      metadata.image = image;
-    }
-    if (metadata.description) {
-      article.contentSnippet = metadata.description;
-    }
+
+  let { metadata } = payload;
+  article = { ...article, ...metadata };
+  console.log(article);
+  if (!article.image && !article.categories) {
+    let categories = (article.title || "").split(" ");
+    if (categories == "") console.log(article.title, image);
+    article.image = `https://source.unsplash.com/random/?search=${categories.join(
+      " "
+    )}`;
   }
+  if (!article.description || article.description.length < 100)
+    return <ArticleSmall article={article} />;
+  article.description = formatSnippet(article.description);
+
   const onHover = () => {
-    console.log(metadata);
+    console.log(article);
   };
-  if (article.contentSnippet.length < 100)
-    return (
-      <ArticleSmall
-        article={article}
-        metadata={metadata}
-        icon={article.icon}
-        image={image}
-      />
-    );
   return (
     <>
       {metadata && !isLoading && (
@@ -60,7 +40,7 @@ export const Article = (props) => {
           >
             <img
               className="relative object-cover w-full h-56 drop-shadow-xl rounded-lg visible md:hidden md:float-right "
-              src={image}
+              src={article.image}
               alt=""
             />
             <div className="relative p-2 md:p-4 py-0 mt-2 md:mt-0 md:float-left block">
@@ -69,30 +49,13 @@ export const Article = (props) => {
               </h5>
 
               <p className="mt-1 text-sm text-stone-500 mb-2 font-light hidden md:visible md:block group-visited:opacity-5">
-                {article.contentSnippet}
+                {article.description}
               </p>
-              <div className="mb-3 text-xs font-normal text-stone-600 break-inside-avoid">
-                <div
-                  className="mr-2"
-                  style={{
-                    background: `url(${article.icon || ""})`,
-                    backgroundSize: "cover",
-                    height: "16px",
-                    width: "16px",
-                    display: "inline-block",
-                    verticalAlign: "middle",
-                    opacity: "0.2",
-                  }}
-                />
-                {metadata.title}{" "}
-                <span className="text-yellow-800 font-extrabold">&#183;</span>
-                &nbsp;
-                <TimeAgo date={article.isoDate} />
-              </div>
+              <ItemSource article={article} />
             </div>
             <img
               className="relative object-cover w-full h-56 drop-shadow-xl rounded-lg hidden md:visible md:block md:float-right"
-              src={image}
+              src={article.image}
               alt=""
             />
           </a>

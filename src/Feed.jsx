@@ -38,7 +38,7 @@ export const Feed = () => {
       document.documentElement.offsetHeight
     );
     if (window.innerHeight + window.scrollY >= pageHeight / 2) {
-      setLoaded(loaded + 3);
+      setLoaded(loaded + 2);
     }
   };
 

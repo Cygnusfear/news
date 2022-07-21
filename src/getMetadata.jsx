@@ -1,4 +1,4 @@
-import formatSnippet from "./utils";
+import { formatSnippet, getNameFromUrl } from "./utils";
 
 const CORS_PROXY = "http://0.0.0.0:3009/";
 const API = "https://news-wildprojector.vercel.app/api/meta?url=";
@@ -17,7 +17,6 @@ const options = {
 export const getMetadata = (url) => async () => {
   return new Promise(async (resolve, reject) => {
     let feedURL = `${import.meta.env.DEV ? CORS_PROXY : ""}${API}${url}`;
-    let returnVal;
     try {
       let feed;
       try {
@@ -26,29 +25,17 @@ export const getMetadata = (url) => async () => {
         console.warn(e);
         return resolve({ empty: true });
       }
+      // bail if no metadata / bad response
       if (!feed.ok) return resolve({});
-      returnVal = feed;
       let response = await feed.json();
-      if (!response.title) {
-        if (import.meta.env.DEV) {
-          feedURL = feedURL.slice(CORS_PROXY.length);
-        }
-        feedURL = feedURL.slice(API.length);
-        feedURL = feedURL.replace(/^https?:\/\//, "");
-        feedURL = feedURL.replace(/^http?:\/\//, "");
-        feedURL = feedURL.replace(/^www\./, "");
-        let domain = feedURL.split("/");
-        response.title = domain[0];
-      }
-      if (response?.openGraph?.image?.url) {
-        response.image = response.openGraph.image.url;
-      } else {
-        // console.log(url, response);
-      }
-      if (response?.general?.description) {
-        response.description = formatSnippet(response.general.description);
-      }
-      return resolve(response);
+      let metadata = {
+        icon: response?.general?.icons[0]?.href || "",
+        siteName: response?.openGraph?.site_name || getNameFromUrl(url),
+        image: response?.openGraph?.image?.url || undefined,
+        description: response?.general?.description || undefined,
+      };
+      console.log({ metadata, response });
+      return resolve({ metadata, response });
     } catch (e) {
       return resolve({ empty: true });
     }

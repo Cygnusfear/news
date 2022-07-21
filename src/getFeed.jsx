@@ -1,4 +1,4 @@
-import formatSnippet from "./utils";
+import { formatSnippet } from "./utils";
 
 const CORS_PROXY = "http://0.0.0.0:3009/";
 const API = "https://news-wildprojector.vercel.app/api/feed?url=";
@@ -20,14 +20,9 @@ export const getFeeds = (urls) => async () => {
           feed.items.forEach((item) => {
             if (item.creator && item.creator.includes("Advertiser")) return;
             if (items.find((x) => x.title === item.title)) return;
-            item.contentSnipper = formatSnippet(item.contentSnippet);
-            if (feed.image) {
-              item.icon = feed.image.url;
-              if (!item.icon) console.log(feed);
-            }
-            if (feed.icon) {
-              item.icon = feed.icon || "";
-            }
+            item.description = item.contentSnippet;
+            item.image = feed?.image?.url || undefined;
+            item.icon = feed?.icon || "";
             items.push(item);
           });
           // console.log(feed);

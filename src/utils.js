@@ -1,4 +1,4 @@
-export default function formatSnippet(snippet) {
+export function formatSnippet(snippet) {
   snippet = snippet
     .replaceAll(/(.*)<[^>]*>/g, " ")
     .replaceAll(/\\s+/g, " ")
@@ -14,4 +14,12 @@ export default function formatSnippet(snippet) {
     snippet.split("…")[0].split("...")[0].split("Continue reading")[0] +
     (delimited ? "..." : "");
   return snippet;
+}
+
+export function getNameFromUrl(url) {
+  url = url.replace(/^https?:\/\//, "");
+  url = url.replace(/^http?:\/\//, "");
+  url = url.replace(/^www\./, "");
+  let domain = url.split("/");
+  return domain[0];
 }
