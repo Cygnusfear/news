@@ -22,7 +22,7 @@ export const ArticleSmall = ({ article }) => {
           <ItemSource article={article} />
         </div>
         <img
-          className="relative object-cover w-full h-28 drop-shadow-xl rounded-lg"
+          className="relative object-cover w-full h-28 drop-shadow-xl rounded-lg opacity-90 group-hover:opacity-100 transition-all"
           src={article.image}
           alt=""
           onError={onImageError}

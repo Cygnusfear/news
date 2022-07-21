@@ -50,7 +50,7 @@ export const Article = ({ article }) => {
             onMouseEnter={() => onHover()}
           >
             <img
-              className="relative object-cover w-full h-56 drop-shadow-xl rounded-lg visible md:hidden md:float-right "
+              className="relative object-cover w-full h-56 drop-shadow-xl rounded-lg visible md:hidden md:float-right opacity-90 group-hover:opacity-100 transition-all"
               src={article.image}
               alt=""
               onError={onImageError}
@@ -66,7 +66,7 @@ export const Article = ({ article }) => {
               <ItemSource article={article} />
             </div>
             <img
-              className="relative object-cover w-full h-56 drop-shadow-xl rounded-lg hidden md:visible md:block md:float-right"
+              className="relative object-cover w-full h-56 drop-shadow-xl rounded-lg hidden md:visible md:block md:float-right opacity-90 group-hover:opacity-100 transition-all"
               src={article.image}
               alt=""
               onError={onImageError}
