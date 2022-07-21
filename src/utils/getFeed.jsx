@@ -1,5 +1,6 @@
 import { setgid } from "process";
 import stringSimilarity from "string-similarity";
+import { getNameFromUrl } from "./utils";
 
 const CORS_PROXY = "http://0.0.0.0:3009/";
 const API = "https://news-wildprojector.vercel.app/api/feed?url=";
@@ -41,7 +42,15 @@ export const getFeeds = (urls) => async () => {
           // let feed = await parse.parseURL(feedURL);
           feed.items.forEach((item) => {
             if (item.creator && item.creator.includes("Advertiser")) return;
-            if (items.find((x) => x.title === item.title)) return;
+            if (
+              items.find(
+                (x) =>
+                  x.title === item.title ||
+                  x.contentSnippet === item.contentSnippet
+              )
+            )
+              return;
+            item.siteName = getNameFromUrl(item.link);
             item.description = item.contentSnippet;
             item.image = feed?.image?.url || undefined;
             item.icon = feed?.icon || "";

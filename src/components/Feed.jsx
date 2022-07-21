@@ -4,18 +4,23 @@ import TimeAgo from "react-timeago";
 import { getFeeds } from "../utils/getFeed";
 import { Article } from "./Article";
 import feedJson from "../feeds.json";
+import useInterval from "../hooks/useInterval";
 
 const feeds = feedJson.feeds;
 
 export const Feed = () => {
   const [urls] = useState(feeds);
   const [loaded, setLoaded] = useState(10);
-  const loader = useCallback(getFeeds(urls), [urls]);
+  const [refresh, setRefresh] = useState(0);
+  const loader = useCallback(getFeeds(urls), [urls, refresh]);
   const { payload, isLoading, loadError } = useAsyncLocalState(loader);
-  if (payload) {
-    // console.log(payload);
-  }
-  if (isLoading)
+
+  useInterval(() => {
+    setRefresh(refresh + 1);
+    console.log("refresh triggered");
+  }, 300000);
+
+  if (!payload?.feed)
     return (
       <p
         className=""
@@ -58,8 +63,8 @@ export const Feed = () => {
             })
             .slice(0, loaded)
             .map((item, idx) => (
-              <Suspense key={idx}>
-                <Article article={item} key={idx} />
+              <Suspense key={item.title}>
+                <Article article={item} key={item.title} />
               </Suspense>
             ))}
         {loadError && <p>Load Error</p>}
