@@ -1,9 +1,9 @@
 import React, { useCallback } from "react";
-import { useAsyncLocalState } from "./Loader";
+import { useAsyncLocalState } from "../utils/loader";
 import TimeAgo from "react-timeago";
-import { getMetadata } from "./getMetadata";
+import { getMetadata } from "../utils/getMetadata";
 import { ArticleSmall } from "./ArticleSmall";
-import { formatSnippet, getImgSrc } from "./utils";
+import { formatSnippet, getImgSrc } from "../utils/utils";
 import { ItemSource } from "./ArticleSource";
 
 export const Article = ({ article }) => {

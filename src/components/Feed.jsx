@@ -1,9 +1,9 @@
 import React, { Suspense, useCallback, useState } from "react";
-import { useAsyncLocalState } from "./Loader";
+import { useAsyncLocalState } from "../utils/Loader";
 import TimeAgo from "react-timeago";
-import { getFeeds } from "./getFeed";
+import { getFeeds } from "../utils/getFeed";
 import { Article } from "./Article";
-import feedJson from "./feeds.json";
+import feedJson from "../feeds.json";
 
 const feeds = feedJson.feeds;
 
