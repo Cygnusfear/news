@@ -1,5 +1,5 @@
 import React, { Suspense, useCallback, useState } from "react";
-import { useAsyncLocalState } from "../utils/Loader";
+import { useAsyncLocalState } from "../utils/loader";
 import TimeAgo from "react-timeago";
 import { getFeeds } from "../utils/getFeed";
 import { Article } from "./Article";
