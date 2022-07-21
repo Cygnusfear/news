@@ -19,8 +19,8 @@ export const getFeeds = (urls) => async () => {
             if (item.creator && item.creator.includes("Advertiser")) return;
             if (items.find((x) => x.title === item.title)) return;
             item.contentSnippet = item.contentSnippet
-              .replaceAll("(?i)<td[^>]*>", " ")
-              .replaceAll("\\s+", " ")
+              .replaceAll(/(.*)<[^>]*>/g, " ")
+              .replaceAll(/\\s+/g, " ")
               .trim();
             let delimited =
               item.contentSnippet.split("…").length > 1 ||
