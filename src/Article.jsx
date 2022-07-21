@@ -11,27 +11,28 @@ export const Article = ({ article }) => {
   const loader = useCallback(getMetadata(url), [url]);
   const { payload, isLoading, loadError } = useAsyncLocalState(loader);
   if (!payload) return <></>;
+  article = { ...article, ...payload.metadata };
 
-  let { metadata } = payload;
-  article = { ...article, ...metadata };
-  console.log(article);
-  if (!article.image && !article.categories) {
-    let categories = (article.title || "").split(" ");
-    if (categories == "") console.log(article.title, image);
+  if (!article.image) {
+    let categories = article.categories;
+    if (!article.categories) {
+      categories = (article.title || "").split(" ");
+    }
     article.image = `https://source.unsplash.com/random/?search=${categories.join(
       " "
     )}`;
   }
-  if (!article.description || article.description.length < 100)
+
+  if (!article.description || article.description.length < 100) {
     return <ArticleSmall article={article} />;
-  article.description = formatSnippet(article.description);
+  }
 
   const onHover = () => {
-    console.log(article);
+    console.log(article, payload);
   };
   return (
     <>
-      {metadata && !isLoading && (
+      {article && !isLoading && (
         <li>
           <a
             href={article.link}
@@ -49,7 +50,7 @@ export const Article = ({ article }) => {
               </h5>
 
               <p className="mt-1 text-sm text-stone-500 mb-2 font-light hidden md:visible md:block group-visited:opacity-5">
-                {article.description}
+                {formatSnippet(article.description)}
               </p>
               <ItemSource article={article} />
             </div>

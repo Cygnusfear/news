@@ -14,6 +14,13 @@ const options = {
   },
 };
 
+function fixIcon(url, icon) {
+  if (icon[0] === "/") icon = icon.slice(1);
+  if (!icon.includes("http"))
+    icon = "https://" + new URL(url).hostname + "/" + icon;
+  return icon;
+}
+
 export const getMetadata = (url) => async () => {
   return new Promise(async (resolve, reject) => {
     let feedURL = `${import.meta.env.DEV ? CORS_PROXY : ""}${API}${url}`;
@@ -29,7 +36,7 @@ export const getMetadata = (url) => async () => {
       if (!feed.ok) return resolve({});
       let response = await feed.json();
       let metadata = {
-        icon: response?.general?.icons[0]?.href || "",
+        icon: fixIcon(url, response?.general?.icons[0]?.href) || "",
         siteName: response?.openGraph?.site_name || getNameFromUrl(url),
         image: response?.openGraph?.image?.url || undefined,
         description: response?.general?.description || undefined,
