@@ -46,7 +46,7 @@ export const Article = ({ article }) => {
         <li>
           <a
             href={article.link}
-            className="block group relative overflow-hidden mb-2 md:mb-8 md:grid grid-cols-2 text-left group-visited:opacity-5"
+            className="block group relative overflow-hidden mb-2 md:mb-8 md:grid grid-cols-2 text-left group-visited:opacity-5 "
             onMouseEnter={() => onHover()}
           >
             <img
@@ -55,12 +55,12 @@ export const Article = ({ article }) => {
               alt=""
               onError={onImageError}
             />
-            <div className="relative p-2 md:p-4 py-0 mt-2 md:mt-0 md:float-left block">
-              <h5 className="text-m text-stone-200 font-light mb-0 md:mb-2 group-hover:text-salomie-300 group-visited:opacity-5">
+            <div className="relative p-2 md:p-4 py-0 mt-2 md:mt-0 md:float-left block mr-4">
+              <h5 className="text-m text-stone-400 font-light mb-0 md:mb-2 group-hover:text-salomie-300 group-visited:opacity-5 transition-all">
                 {article.title}
               </h5>
 
-              <p className="mt-1 text-sm text-stone-500 mb-2 font-light hidden md:visible md:block group-visited:opacity-5">
+              <p className="mt-1 text-sm text-stone-500 mb-2 font-light hidden md:visible md:block group-visited:opacity-5 prose">
                 {formatSnippet(article.description)}
               </p>
               <ItemSource article={article} />

@@ -16,7 +16,7 @@ export const ArticleSmall = ({ article }) => {
         onMouseEnter={() => onHover()}
       >
         <div className="relative p-2 md:p-4 py-0">
-          <h5 className="text-sm md:text-m text-stone-200 font-light mb-1 md:mb-2 group-hover:text-salomie-300">
+          <h5 className="text-sm md:text-m text-stone-400 font-light mb-1 md:mb-2 group-hover:text-salomie-300 transition-all">
             {article.title}
           </h5>
           <ItemSource article={article} />
