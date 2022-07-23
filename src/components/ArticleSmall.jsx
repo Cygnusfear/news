@@ -14,6 +14,7 @@ export const ArticleSmall = ({ article }) => {
         href={article.link}
         className="block group relative overflow-hidden mb-6 md:mb-8 grid grid-cols-2 text-left visited:opacity-80"
         onMouseEnter={() => onHover()}
+        target="_blank"
       >
         <div className="relative p-2 md:p-4 py-0">
           <h5 className="text-sm md:text-m text-stone-400 font-light mb-1 md:mb-2 group-hover:text-salomie-300 transition-all">

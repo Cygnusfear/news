@@ -1,5 +1,9 @@
 {
   "feeds": [
+    "https://ethhub.substack.com/feed",
+    "https://podcast.ethhub.io/rss",
+    "https://newsletter.banklesshq.com/feed",
+    "https://weekinethereumnews.com/feed/",
     "https://news.ycombinator.com/rss",
     "https://blog.siggraph.org/feed/",
     "https://scitechdaily.com/feed/",

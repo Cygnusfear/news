@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { createRef, useCallback } from "react";
 import { useAsyncLocalState } from "../utils/loader";
 import TimeAgo from "react-timeago";
 import { getMetadata } from "../utils/getMetadata";
@@ -10,6 +10,7 @@ export const Article = ({ article }) => {
   const [url] = React.useState(article.link);
   const loader = useCallback(getMetadata(url), [url]);
   const { payload, isLoading, loadError } = useAsyncLocalState(loader);
+  const articleRef = createRef();
 
   if (!payload || isLoading) return <></>;
 
@@ -29,7 +30,7 @@ export const Article = ({ article }) => {
   }
 
   if (!article.description || article.description.length < 100) {
-    return <ArticleSmall article={article} />;
+    return <ArticleSmall article={article} ref={articleRef} />;
   }
 
   const onHover = () => {
@@ -43,11 +44,12 @@ export const Article = ({ article }) => {
   return (
     <>
       {article && !isLoading && (
-        <li>
+        <li ref={articleRef}>
           <a
             href={article.link}
             className="block group relative overflow-hidden mb-2 md:mb-8 md:grid grid-cols-2 text-left group-visited:opacity-5 "
             onMouseEnter={() => onHover()}
+            target="_blank"
           >
             <img
               className="relative object-cover w-full h-56 drop-shadow-xl rounded-lg visible md:hidden md:float-right opacity-90 group-hover:opacity-100 transition-all"
