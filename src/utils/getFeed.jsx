@@ -52,7 +52,8 @@ export const getFeeds = (urls) => async () => {
               return;
             item.siteName = getNameFromUrl(item.link);
             item.description = item.contentSnippet;
-            item.image = feed?.image?.url || undefined;
+            // item.image = feed?.image?.url || undefined;
+            item.image = item?.enclosure?.url || item.image;
             item.icon = feed?.icon || "";
             items.push(item);
             // if (item.categories) {
