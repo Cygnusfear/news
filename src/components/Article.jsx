@@ -29,7 +29,7 @@ export const Article = ({ article }) => {
   const onScroll = () => {
     if (articleRef?.current) {
       let el = articleRef.current;
-      let elDistanceToTop = el.offsetTop - el.scrollTop + el.clientTop + 112;
+      let elDistanceToTop = el.offsetTop - el.scrollTop + el.clientTop + 0;
       let x =
         (Math.min(
           window.innerHeight,
@@ -38,7 +38,7 @@ export const Article = ({ article }) => {
           window.innerHeight) *
         1.25;
       let getMid = x <= 0.5 ? x : 0.5 + -(x - 0.5);
-      let opacity = Math.max(0, Math.min(1, 0.7 + 0.5 * getMid));
+      let opacity = Math.max(0, Math.min(1, 0.7 + 0.7 * getMid));
       if ((previousOpacity = -1)) {
         el.style.opacity = opacity;
       }
