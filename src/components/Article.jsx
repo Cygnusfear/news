@@ -1,16 +1,54 @@
-import React, { createRef, useCallback } from "react";
+import React, { useRef, useCallback } from "react";
 import { useAsyncLocalState } from "../utils/loader";
 import TimeAgo from "react-timeago";
 import { getMetadata } from "../utils/getMetadata";
 import { ArticleSmall } from "./ArticleSmall";
-import { formatSnippet, getImgSrc } from "../utils/utils";
+import { formatSnippet, getImgSrc, lerp } from "../utils/utils";
 import { ItemSource } from "./ArticleSource";
+import useInterval from "../hooks/useInterval";
 
 export const Article = ({ article }) => {
   const [url] = React.useState(article.link);
   const loader = useCallback(getMetadata(url), [url]);
   const { payload, isLoading, loadError } = useAsyncLocalState(loader);
-  const articleRef = createRef();
+  const articleRef = useRef();
+
+  let previousOpacity = -1;
+  let targetOpacity = 1;
+  let opacityDelta = 0;
+
+  useInterval(() => {
+    if (!payload || isLoading) return;
+    let el = articleRef.current;
+    if (targetOpacity !== parseFloat(el.style.opacity)) {
+      el.style.opacity = lerp(previousOpacity, targetOpacity, opacityDelta);
+      opacityDelta += 0.01;
+    }
+  }, 1);
+
+  const onScroll = () => {
+    if (articleRef?.current) {
+      let el = articleRef.current;
+      let elDistanceToTop = el.offsetTop - el.scrollTop + el.clientTop + 112;
+      let x =
+        (Math.min(
+          window.innerHeight,
+          Math.max(0, elDistanceToTop - window.scrollY)
+        ) /
+          window.innerHeight) *
+        1.25;
+      let getMid = x <= 0.5 ? x : 0.5 + -(x - 0.5);
+      let opacity = Math.max(0, Math.min(1, 0.7 + 0.5 * getMid));
+      if ((previousOpacity = -1)) {
+        el.style.opacity = opacity;
+      }
+      previousOpacity = parseFloat(el.style.opacity);
+      targetOpacity = opacity;
+      opacityDelta = 0;
+    }
+  };
+
+  onScroll();
 
   if (!payload || isLoading) return <></>;
 
@@ -29,8 +67,14 @@ export const Article = ({ article }) => {
     article.image = getImgSrc(article.content) || article.image;
   }
 
+  window.addEventListener("scroll", onScroll);
+
   if (!article.description || article.description.length < 100) {
-    return <ArticleSmall article={article} ref={articleRef} />;
+    return (
+      <li ref={articleRef}>
+        <ArticleSmall article={article} />
+      </li>
+    );
   }
 
   const onHover = () => {
@@ -47,28 +91,28 @@ export const Article = ({ article }) => {
         <li ref={articleRef}>
           <a
             href={article.link}
-            className="block group relative overflow-hidden mb-2 md:mb-8 md:grid grid-cols-2 text-left group-visited:opacity-5 "
+            className="block group relative overflow-hidden mb-2 md:mb-8 md:grid grid-cols-2 text-left"
             onMouseEnter={() => onHover()}
             target="_blank"
           >
             <img
-              className="relative object-cover w-full h-56 drop-shadow-xl rounded-lg visible md:hidden md:float-right opacity-90 group-hover:opacity-100 transition-all"
+              className="relative object-cover w-full h-56 drop-shadow-xl rounded-lg visible md:hidden md:float-right transition-all"
               src={article.image}
               alt=""
               onError={onImageError}
             />
             <div className="relative p-2 md:p-4 py-0 mt-2 md:mt-0 md:float-left block mr-4">
-              <h5 className="text-m text-stone-400 font-light mb-0 md:mb-2 group-hover:text-salomie-300 group-visited:opacity-5 transition-all">
+              <h5 className="text-m text-stone-400 font-light mb-0 md:mb-2 group-hover:text-stone-400 transition-all">
                 {article.title}
               </h5>
 
-              <p className="mt-1 text-sm text-stone-500 mb-2 font-light hidden md:visible md:block group-visited:opacity-5 prose">
+              <p className="mt-1 text-sm text-stone-500 mb-2 font-light hidden md:visible md:block prose">
                 {formatSnippet(article.description)}
               </p>
               <ItemSource article={article} />
             </div>
             <img
-              className="relative object-cover w-full h-56 drop-shadow-xl rounded-lg hidden md:visible md:block md:float-right opacity-90 group-hover:opacity-100 transition-all"
+              className="relative object-cover w-full h-56 drop-shadow-xl rounded-lg hidden md:visible md:block md:float-right transition-all"
               src={article.image}
               alt=""
               onError={onImageError}

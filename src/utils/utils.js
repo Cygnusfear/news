@@ -38,3 +38,10 @@ export function fixIcon(url, icon) {
     icon = "https://" + new URL(url).hostname + "/" + icon;
   return icon;
 }
+
+// Obtient une interpolation linéaire entre 2 valeurs
+export function lerp(value1, value2, amount) {
+  amount = amount < 0 ? 0 : amount;
+  amount = amount > 1 ? 1 : amount;
+  return value1 + (value2 - value1) * amount;
+}
