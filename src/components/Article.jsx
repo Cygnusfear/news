@@ -29,7 +29,7 @@ export const Article = ({ article }) => {
   const onScroll = () => {
     if (articleRef?.current) {
       let el = articleRef.current;
-      let elDistanceToTop = el.offsetTop - el.scrollTop + el.clientTop + 0;
+      let elDistanceToTop = el.offsetTop - el.scrollTop + el.clientTop + 114;
       let x =
         (Math.min(
           window.innerHeight,
