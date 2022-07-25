@@ -37,8 +37,8 @@ export const Article = ({ article }) => {
         ) /
           window.innerHeight) *
         1.25;
-      let getMid = x <= 0.5 ? x : 0.5 + -(x - 0.5);
-      let opacity = Math.max(0, Math.min(1, 0.7 + 0.7 * getMid));
+      let getMid = (-(x ** 2) + x) * 4;
+      let opacity = Math.max(0, Math.min(1, 0.7 + 0.5 * getMid));
       if ((previousOpacity = -1)) {
         el.style.opacity = opacity;
       }
